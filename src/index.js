@@ -3,7 +3,11 @@ const cors =require("cors")
 const mongoose = require("mongoose")
 const connect = require("./configs/db")
 
-const userController=require("./controllers/user-controller")
+const productcontroller = require("./controllers/stocksinew.controller");
+const topGainerController = require("./controllers/topgainer.controller");
+const toplooserController = require("./controllers/toplooser.controller");
+const popularFundController = require("./controllers/popualrfunds.controller");
+const userController = require("./controllers/user-controller")
 const {register,login}=require("./controllers/auth-controller")
 
 const app = express()
@@ -15,7 +19,12 @@ app.use(bodyparser.urlencoded({
 app.use(cors())
 app.use(express.json())
 
+app.use("/products", productcontroller);
+app.use("/topgainers", topGainerController);
+app.use("/toploosers", toplooserController);
 
+//FOR MUtual funds page
+app.use("/popularfunds", popularFundController);
 app.use("/users",userController)
 app.post("/register",register)
 app.post("/login",login)
